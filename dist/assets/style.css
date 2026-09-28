@@ -409,6 +409,7 @@ body.letter-open::after { content:""; position:fixed; z-index:30; inset:0; backg
   .game-copy .eyebrow { display:none; }
   .game-copy .chapter-title { font-size:clamp(2.25rem,10.5vw,3.15rem); line-height:.98; }
   .game-copy .chapter-title br { display:none; }
+  .game-copy .chapter-title em::before { content:" "; }
   .game-copy .chapter-lead { margin:10px 0 12px; font-size:.94rem; line-height:1.5; }
   .game-progress { margin-top:10px; gap:6px; }
   .game-progress span { width:clamp(28px,13vw,46px); height:6px; }

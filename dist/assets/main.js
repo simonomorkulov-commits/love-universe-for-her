@@ -116,6 +116,10 @@ const blurSteps = [15, 11, 7, 3, 0];
 let galaxyStars = [];
 let caught = 0;
 
+function updateProgressA11y(value) {
+  progressWrap?.setAttribute('aria-label', currentLanguage === 'kg' ? `Прогресс: 5тен ${value}` : `Прогресс: ${value} из 5`);
+}
+
 function createGalaxy() {
   if (!milkyWay || galaxyStars.length) return;
   const starCount = compactScreen ? 70 : 110;
@@ -202,7 +206,7 @@ heart?.addEventListener('click', () => {
   caught += 1;
   progress[caught - 1]?.classList.add('filled');
   gatherStarBatch(caught - 1);
-  progressWrap?.setAttribute('aria-label', `Прогресс: ${caught} из 5`);
+  updateProgressA11y(caught);
   heart.classList.remove('caught');
   void heart.offsetWidth;
   heart.classList.add('caught');
@@ -225,7 +229,7 @@ document.querySelector('.restart-game')?.addEventListener('click', () => {
     star.style.left = '';
     star.style.top = '';
   });
-  progressWrap?.setAttribute('aria-label', 'Прогресс: 0 из 5');
+  updateProgressA11y(0);
   finalReveal?.setAttribute('aria-hidden', 'true');
   gameSection?.removeAttribute('hidden');
   moveHeart();
@@ -378,6 +382,7 @@ function applyLanguage(language) {
   envelope?.setAttribute('aria-label', currentLanguage === 'kg' ? 'Катты ачуу' : 'Открыть письмо');
   closeLetter?.setAttribute('aria-label', currentLanguage === 'kg' ? 'Катты жабуу' : 'Закрыть письмо');
   heart?.setAttribute('aria-label', currentLanguage === 'kg' ? 'Жүрөктү кармоо' : 'Поймать сердце');
+  updateProgressA11y(caught);
   document.querySelectorAll('img[alt]').forEach(image => {
     image.dataset.ruAlt ??= image.alt;
     image.alt = currentLanguage === 'kg' ? (altKyrgyz[image.dataset.ruAlt] ?? image.dataset.ruAlt) : image.dataset.ruAlt;
