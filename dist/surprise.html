@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#100914"><meta name="description" content="Маленький интерактивный сюрприз для любимого человека.">
+  <title>Сюрприз — Только для тебя</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath fill='%23ff4d8d' d='M32 55S6 40 6 20C6 6 24 3 32 16 40 3 58 6 58 20c0 20-26 35-26 35Z'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Unbounded:wght@500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="assets/style.css">
+</head>
+<body class="page-surprise">
+  <div class="noise" aria-hidden="true"></div><canvas id="stardust" aria-hidden="true"></canvas><div class="cursor-glow" aria-hidden="true"></div>
+  <header class="site-header">
+    <a class="brand" href="index.html" aria-label="На главную"><span>мы</span><i>✦</i></a>
+    <nav aria-label="Основная навигация"><a href="index.html">Начало</a><a href="story.html">Наша история</a><a href="reasons.html">Почему ты</a><a href="letter.html">Письмо</a><a class="nav-gift active" href="surprise.html">Сюрприз <span>↗</span></a></nav>
+    <button class="menu-toggle" type="button" aria-label="Открыть меню" aria-expanded="false"><span></span><span></span></button>
+  </header>
+  <main class="surprise-main">
+    <section class="heart-game" aria-labelledby="game-title">
+      <div class="game-copy">
+        <p class="eyebrow reveal">ФИНАЛЬНАЯ ГЛАВА • ПОЙМАЙ ЧУВСТВО</p>
+        <h1 id="game-title" class="chapter-title reveal">Поймай<br><em>пять сердец</em></h1>
+        <p class="chapter-lead reveal">Они немного непоседливые. Почти как мои мысли, когда я вижу тебя.</p>
+        <div class="game-progress" aria-label="Прогресс: 0 из 5"><span></span><span></span><span></span><span></span><span></span></div>
+      </div>
+      <div class="game-field">
+        <div class="field-orbit orbit-a"></div><div class="field-orbit orbit-b"></div><div class="field-orbit orbit-c"></div>
+        <button class="catch-heart" type="button" aria-label="Поймать сердце">♥</button>
+        <p class="field-note">нажми на сердце</p>
+      </div>
+    </section>
+    <section class="final-reveal" aria-hidden="true">
+      <canvas id="confetti" aria-hidden="true"></canvas>
+      <div class="final-glow"></div>
+      <p>и вот главный секрет</p>
+      <h2>В любой вселенной<br>я бы снова<br><em>выбрал тебя.</em></h2>
+      <div class="final-actions"><button class="restart-game" type="button">Поймать ещё раз ↻</button><a href="index.html">Вернуться в начало →</a></div>
+    </section>
+  </main>
+  <div class="page-wipe" aria-hidden="true"></div><script src="assets/main.js"></script>
+</body>
+</html>
