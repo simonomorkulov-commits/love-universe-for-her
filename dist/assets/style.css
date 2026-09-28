@@ -212,7 +212,21 @@ body.letter-open::after { content:""; position:fixed; z-index:30; inset:0; backg
 .orbit-b { width:62%; aspect-ratio:1; border-style:dashed; animation:orbitSpin 25s linear infinite; }
 .orbit-c { width:92%; aspect-ratio:1; }
 @keyframes orbitSpin { to {transform:translate(-50%,-50%) rotate(360deg)} }
-.catch-heart { position:absolute; left:50%; top:50%; width:92px; height:92px; border:1px solid rgba(255,255,255,.45); border-radius:50%; background:radial-gradient(circle at 35% 30%,#ff99ba,#ff397b 58%,#9a0d5d); color:#fff; font-size:2.9rem; box-shadow:0 0 20px rgba(255,77,141,.65),0 0 70px rgba(255,77,141,.3); transform:translate(-50%,-50%); cursor:pointer; transition:left .6s cubic-bezier(.2,.8,.2,1),top .6s cubic-bezier(.2,.8,.2,1),transform .25s; animation:heartbeat 2s ease-in-out infinite; }
+.photo-reveal { position:absolute; z-index:1; left:50%; top:50%; width:min(56%,390px); height:78%; transform:translate(-50%,-50%) rotate(-2deg) scale(.92); border:1px solid rgba(255,255,255,.32); border-radius:180px 180px 28px 28px; padding:7px; background:rgba(255,255,255,.08); box-shadow:0 35px 100px rgba(0,0,0,.5); overflow:hidden; opacity:.72; transition:1s cubic-bezier(.2,.8,.2,1); }
+.photo-reveal::before { content:""; position:absolute; z-index:3; inset:7px; border-radius:inherit; box-shadow:inset 0 0 0 1px rgba(255,255,255,.15),inset 0 -90px 100px rgba(8,6,12,.5); pointer-events:none; }
+.photo-reveal img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; border-radius:inherit; filter:saturate(.75) contrast(1.05); transition:1s; }
+.photo-veil { position:absolute; z-index:2; inset:7px; display:grid; grid-template-columns:repeat(5,1fr); border-radius:inherit; overflow:hidden; }
+.photo-veil i { display:block; background:linear-gradient(180deg,rgba(15,7,20,.97),rgba(40,14,38,.93)); border-right:1px solid rgba(255,255,255,.07); transform-origin:top; transition:opacity .7s,transform .85s cubic-bezier(.2,.8,.2,1),filter .7s; }
+.photo-veil i:nth-child(even) { transform-origin:bottom; }
+.photo-veil i.revealed { opacity:0; transform:scaleY(0); filter:blur(15px); }
+.photo-caption { position:absolute; z-index:4; left:28px; right:28px; bottom:25px; opacity:0; transform:translateY(18px); transition:.8s .2s; text-shadow:0 2px 20px rgba(0,0,0,.8); }
+.photo-caption span { display:block; color:rgba(255,255,255,.72); font-size:.7rem; letter-spacing:.15em; text-transform:uppercase; }
+.photo-caption strong { display:block; margin-top:6px; font-family:var(--display); font-size:clamp(1rem,1.8vw,1.55rem); line-height:1.15; }
+.photo-reveal.complete { opacity:1; transform:translate(-50%,-50%) rotate(0) scale(1.04); box-shadow:0 35px 120px rgba(255,77,141,.32),0 0 0 1px rgba(255,126,169,.55); }
+.photo-reveal.complete img { filter:saturate(1.08) contrast(1.02); }
+.photo-reveal.complete .photo-caption { opacity:1; transform:none; }
+.catch-heart { position:absolute; z-index:6; left:50%; top:50%; width:92px; height:92px; border:1px solid rgba(255,255,255,.45); border-radius:50%; background:radial-gradient(circle at 35% 30%,#ff99ba,#ff397b 58%,#9a0d5d); color:#fff; font-size:2.9rem; box-shadow:0 0 20px rgba(255,77,141,.65),0 0 70px rgba(255,77,141,.3); transform:translate(-50%,-50%); cursor:pointer; transition:left .6s cubic-bezier(.2,.8,.2,1),top .6s cubic-bezier(.2,.8,.2,1),transform .25s,opacity .4s; animation:heartbeat 2s ease-in-out infinite; }
+.photo-reveal.complete + .catch-heart { opacity:0; pointer-events:none; }
 .catch-heart:hover { transform:translate(-50%,-50%) scale(1.12); }
 .catch-heart.caught { animation:heartCatch .45s ease; }
 @keyframes heartCatch { 50% {transform:translate(-50%,-50%) scale(1.5);filter:brightness(1.8)} }
@@ -223,6 +237,10 @@ body.letter-open::after { content:""; position:fixed; z-index:30; inset:0; backg
 .final-reveal h2 { position:relative; z-index:2; margin:20px 0 50px; font-family:var(--display); font-size:clamp(2.8rem,7.5vw,8.3rem); line-height:.95; letter-spacing:-.075em; }
 .final-reveal h2 em { font-family:var(--body); font-weight:400; color:#ff73a2; }
 .final-glow { position:absolute; width:58vw; aspect-ratio:1; border-radius:50%; background:radial-gradient(circle,rgba(255,77,141,.35),rgba(173,99,255,.12) 45%,transparent 70%); animation:softPulse 4s ease-in-out infinite alternate; }
+.final-portrait { position:absolute; z-index:1; left:50%; top:50%; width:min(35vw,430px); height:min(72vh,670px); padding:7px; border:1px solid rgba(255,255,255,.27); border-radius:210px 210px 28px 28px; overflow:hidden; transform:translate(-50%,-50%) rotate(4deg); opacity:.34; box-shadow:0 40px 120px rgba(0,0,0,.5); animation:finalPortrait 7s ease-in-out infinite alternate; }
+.final-portrait::after { content:""; position:absolute; inset:0; background:linear-gradient(180deg,rgba(9,7,13,.08),rgba(9,7,13,.6)); }
+.final-portrait img { width:100%; height:100%; object-fit:cover; border-radius:inherit; filter:saturate(1.08); }
+@keyframes finalPortrait { to { transform:translate(-50%,-52%) rotate(-2deg) scale(1.045); opacity:.46; } }
 #confetti { position:absolute; inset:0; width:100%; height:100%; }
 .final-actions { position:relative; z-index:2; display:flex; gap:12px; flex-wrap:wrap; justify-content:center; }
 .final-actions button,.final-actions a { border:1px solid var(--line); border-radius:99px; padding:14px 22px; background:rgba(255,255,255,.07); color:var(--ink); cursor:pointer; }
@@ -245,6 +263,7 @@ body.letter-open::after { content:""; position:fixed; z-index:30; inset:0; backg
   .envelope { width:min(82vw,520px); }
   .heart-game { grid-template-columns:1fr; padding-top:130px; }
   .game-field { min-height:55vh; }
+  .photo-reveal { width:min(62%,340px); height:76%; }
 }
 @media (max-width: 560px) {
   .hero-visual { right:-42%; top:34%; width:115vw; }
@@ -258,5 +277,8 @@ body.letter-open::after { content:""; position:fixed; z-index:30; inset:0; backg
   .chapter-next a b { width:58px; }
   .game-progress span { width:32px; }
   .game-field { border-radius:24px; }
+  .photo-reveal { width:68%; height:72%; border-radius:120px 120px 22px 22px; }
+  .photo-caption { left:18px; right:18px; bottom:18px; }
+  .final-portrait { width:min(72vw,350px); height:62vh; opacity:.3; }
   .love-letter { inset:12px; max-height:calc(100vh - 24px); padding:56px 26px 32px; }
 }

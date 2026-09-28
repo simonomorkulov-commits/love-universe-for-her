@@ -37,6 +37,7 @@ yarn-error.log*
 # typescript
 next-env.d.ts
 /.wrangler/
+/*.tar.gz
 # Checkout-local execution profile and tool state; never publish them.
 /.sites-runtime/
 /.agents/

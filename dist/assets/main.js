@@ -102,6 +102,8 @@ const progress = [...document.querySelectorAll('.game-progress span')];
 const progressWrap = document.querySelector('.game-progress');
 const gameSection = document.querySelector('.heart-game');
 const finalReveal = document.querySelector('.final-reveal');
+const photoReveal = document.querySelector('.photo-reveal');
+const photoPanels = [...document.querySelectorAll('.photo-veil i')];
 let caught = 0;
 
 function moveHeart() {
@@ -152,17 +154,23 @@ heart?.addEventListener('click', () => {
   if (caught >= 5) return;
   caught += 1;
   progress[caught - 1]?.classList.add('filled');
+  photoPanels[caught - 1]?.classList.add('revealed');
   progressWrap?.setAttribute('aria-label', `Прогресс: ${caught} из 5`);
   heart.classList.remove('caught');
   void heart.offsetWidth;
   heart.classList.add('caught');
-  if (caught === 5) setTimeout(finishGame, reduced ? 50 : 550);
+  if (caught === 5) {
+    photoReveal?.classList.add('complete');
+    setTimeout(finishGame, reduced ? 150 : 2200);
+  }
   else moveHeart();
 });
 
 document.querySelector('.restart-game')?.addEventListener('click', () => {
   caught = 0;
   progress.forEach(dot => dot.classList.remove('filled'));
+  photoPanels.forEach(panel => panel.classList.remove('revealed'));
+  photoReveal?.classList.remove('complete');
   progressWrap?.setAttribute('aria-label', 'Прогресс: 0 из 5');
   finalReveal?.setAttribute('aria-hidden', 'true');
   gameSection?.removeAttribute('hidden');
