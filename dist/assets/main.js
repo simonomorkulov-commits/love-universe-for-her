@@ -1,4 +1,5 @@
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const compactScreen = matchMedia('(max-width: 560px)').matches;
 let currentLanguage = 'ru';
 const menuButton = document.querySelector('.menu-toggle');
 menuButton?.addEventListener('click', () => {
@@ -95,6 +96,11 @@ envelope?.addEventListener('click', () => {
 closeLetter?.addEventListener('click', hideLetter);
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape' && letter?.classList.contains('visible')) hideLetter();
+  if (event.key === 'Escape' && document.body.classList.contains('menu-open')) {
+    document.body.classList.remove('menu-open');
+    menuButton?.setAttribute('aria-expanded', 'false');
+    menuButton?.focus();
+  }
 });
 
 const heart = document.querySelector('.catch-heart');
@@ -112,7 +118,8 @@ let caught = 0;
 
 function createGalaxy() {
   if (!milkyWay || galaxyStars.length) return;
-  galaxyStars = Array.from({length:110}, (_, index) => {
+  const starCount = compactScreen ? 70 : 110;
+  galaxyStars = Array.from({length:starCount}, (_, index) => {
     const star = document.createElement('i');
     star.className = 'galaxy-star';
     star.dataset.batch = String(index % 5);
@@ -165,7 +172,7 @@ function burstConfetti() {
   const scale = canvas.width / innerWidth;
   ctx.scale(scale, scale);
   const palette = ['#ff4d8d','#ff9ab9','#ad63ff','#ffffff','#ff7a72'];
-  const pieces = Array.from({length:140}, () => ({
+  const pieces = Array.from({length:compactScreen ? 80 : 140}, () => ({
     x: innerWidth/2, y: innerHeight*.44, vx:(Math.random()-.5)*15,
     vy:-Math.random()*13-4, g:.18+Math.random()*.12, r:Math.random()*6+3,
     rot:Math.random()*6, spin:(Math.random()-.5)*.22, color:palette[Math.floor(Math.random()*palette.length)]
@@ -223,6 +230,10 @@ document.querySelector('.restart-game')?.addEventListener('click', () => {
   gameSection?.removeAttribute('hidden');
   moveHeart();
   scrollTo({top:0,behavior:reduced?'auto':'smooth'});
+});
+
+addEventListener('orientationchange', () => {
+  if (heart && caught < 5) setTimeout(moveHeart, 280);
 });
 
 const kyrgyzText = {
